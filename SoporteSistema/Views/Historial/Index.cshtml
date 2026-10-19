@@ -1,0 +1,65 @@
+@model IEnumerable<SoporteSistema.Models.Historial>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IdUsuario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdReporte)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Accion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fecha)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdReporteNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdUsuarioNavigation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(model => item.IdUsuario)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.IdReporte)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.Accion)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.Fecha)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.IdReporteNavigation)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.IdUsuarioNavigation)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdHistorial">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.IdHistorial">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdHistorial">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

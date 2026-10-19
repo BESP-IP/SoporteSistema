@@ -1,0 +1,60 @@
+@SoporteSistema_HostAddress = https://localhost:7259
+@accessToken = REEMPLAZAR_POR_EL_TOKEN_DEVUELTO_POR_LOGIN
+@idReporte = 1
+
+### Registrar usuario (el servidor asigna el rol Usuario)
+POST {{SoporteSistema_HostAddress}}/api/v1/auth/registro
+Content-Type: application/json
+
+{
+  "nombreUsuario": "Usuario de prueba",
+  "email": "usuario@example.com",
+  "contraseña": "Cambiar-Esta-Clave-123!"
+}
+
+### Iniciar sesión y copiar accessToken de la respuesta
+POST {{SoporteSistema_HostAddress}}/api/v1/auth/login
+Content-Type: application/json
+
+{
+  "email": "usuario@example.com",
+  "contraseña": "Cambiar-Esta-Clave-123!"
+}
+
+### Listar reportes (Administrador o Usuario)
+GET {{SoporteSistema_HostAddress}}/api/v1/reportes
+Authorization: Bearer {{accessToken}}
+Accept: application/json
+
+### Consultar un reporte
+GET {{SoporteSistema_HostAddress}}/api/v1/reportes/{{idReporte}}
+Authorization: Bearer {{accessToken}}
+Accept: application/json
+
+### Crear reporte (Administrador o Usuario)
+POST {{SoporteSistema_HostAddress}}/api/v1/reportes
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+{
+  "tituloReporte": "No se puede acceder al aula virtual",
+  "tipoReporte": "Incidencia",
+  "idCategoria": 1,
+  "archivoUrl": "https://ejemplo.com/evidencias/incidencia.png"
+}
+
+### Actualizar reporte (solo Administrador)
+PUT {{SoporteSistema_HostAddress}}/api/v1/reportes/{{idReporte}}
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+{
+  "tituloReporte": "Acceso al aula virtual restablecido",
+  "tipoReporte": "Incidencia",
+  "idCategoria": 1,
+  "archivoUrl": ""
+}
+
+### Eliminar reporte (solo Administrador)
+DELETE {{SoporteSistema_HostAddress}}/api/v1/reportes/{{idReporte}}
+Authorization: Bearer {{accessToken}}
